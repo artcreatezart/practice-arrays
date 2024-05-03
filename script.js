@@ -142,20 +142,104 @@ const figures = [{
     }
 ]
 
+
+// -------- HTML ELEMENTS & SETTING AS GLOBAL SCOPED --------
+
+// Get the results div:
 const results = document.getElementById('results');
 
-for (let i = 0; i < figures.length; i++) {
-    results.innerHTML += `
-    <div class="card">
-        <img src="${figures[i].image}" alt="img">
-        <div class="card-details">
-            <h3>${figures[i].name}</h3>
-            <p>${figures[i].description}</p>
-            <div class="bottom-section">
-                <h4>${figures[i].price}</h4>
-                <a href="${figures[i].link}" target="_blank">BUY NOW </a>
+// Get the sort button:
+const nameButton = document.getElementById('nameButton');
+
+const priceButton = document.getElementById('priceButton');
+
+const descriptionButton = document.getElementById('descriptionButton');
+
+// -------- POPULATE CARDS & Initial Population --------
+
+// Populate cards - no sorting just populatin
+function populateCards(array) {
+    // Clear out any resutls first:
+    results.innerHTML = '';
+    // Loop over the students and create a crad for each student - for loop
+    for (let i = 0; i < figures.length; i++) {
+        // then populate:
+        results.innerHTML += `
+        <div class="card">
+            <img src="${figures[i].image}" alt="img">
+            <div class="card-details">
+                <h3>${figures[i].name}</h3>
+                <p>${figures[i].description}</p>
+                <div class="bottom-section">
+                    <h4>${figures[i].price}</h4>
+                    <a href="${figures[i].link}" target="_blank">BUY NOW </a>
+                </div>
             </div>
         </div>
-    </div>
-`
+    `
+    }
 }
+
+populateCards(figures);
+
+// ------- SORTING FUCTIONS & OnClicks ---------
+
+// Sort by Name
+function sortbyName() {
+    // Compare function to compare strings:
+    function compareByName(a, b) {
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+    }
+    // new variable for the sorted array
+    const sortedName = figures.sort(compareByName);
+    console.log(sortedName);
+    // Populate mehtod - pass in sortedNames array
+    populateCards(sortedName);
+}
+
+// Onclick - sort the array and repopulate the cards:
+nameButton.addEventListener('click', function() {
+    console.log('sort button working');
+    sortbyName();
+});
+
+
+// Sort by Price
+function sortbyPrice() {
+    // Compare function to compare strings:
+    function compareByPrice(a, b) {
+        return a.price.toLowerCase().localeCompare(b.price.toLowerCase());
+    }
+    // new variable for the sorted array
+    const sortedPrice = figures.sort(compareByPrice);
+    console.log(sortedPrice);
+    // Populate mehtod - pass in sortedNames array
+    populateCards(sortedPrice);
+
+}
+
+// Onclick - sort the array and repopulate the cards:
+priceButton.addEventListener('click', function() {
+    console.log('sort button working');
+    sortbyPrice();
+});
+
+// Sort by Description
+function sortbyDescription() {
+    // Compare function to compare strings:
+    function compareByDescription(a, b) {
+        return a.description.toLowerCase().localeCompare(b.description.toLowerCase());
+    }
+    // new variable for the sorted array
+    const sortedDescription = figures.sort(compareByDescription);
+    console.log(sortedDescription);
+    // Populate mehtod - pass in sortedNames array
+    populateCards(sortedDescription);
+
+}
+
+// Onclick - sort the array and repopulate the cards:
+descriptionButton.addEventListener('click', function() {
+    console.log('sort button working');
+    sortbyDescription();
+});
