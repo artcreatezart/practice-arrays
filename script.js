@@ -149,9 +149,13 @@ const figures = [{
 const results = document.getElementById('results');
 
 // Get the sort button:
-const nameButton = document.getElementById('nameButton');
+const nameAToZButton = document.getElementById('nameAToZButton');
 
-const priceButton = document.getElementById('priceButton');
+const nameZToAButton = document.getElementById('nameZToAButton');
+
+const priceLowToHighButton = document.getElementById('priceLowToHighButton');
+
+const priceHighToLowButton = document.getElementById('priceHighToLowButton');
 
 const descriptionButton = document.getElementById('descriptionButton');
 
@@ -182,10 +186,12 @@ function populateCards(array) {
 
 populateCards(figures);
 
-// ------- SORTING FUCTIONS & OnClicks ---------
+// ------- SORTING FUCTIONS & OnClicks --------
 
-// Sort by Name
-function sortbyName() {
+// NAME ALPHABETICAL ORDER FILTER
+
+// Sort by Name A TO Z --------
+function sortbyNameAToZ() {
     // Compare function to compare strings:
     function compareByName(a, b) {
         return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
@@ -198,14 +204,35 @@ function sortbyName() {
 }
 
 // Onclick - sort the array and repopulate the cards:
-nameButton.addEventListener('click', function() {
+nameAToZButton.addEventListener('click', function () {
     console.log('sort button working');
-    sortbyName();
+    sortbyNameAToZ();
+});
+
+// Sort by Name Z To A -------
+function sortbyNameZToA() {
+    // Compare function to compare strings:
+    function compareByName(b, a) {
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+    }
+    // new variable for the sorted array
+    const sortedName = figures.sort(compareByName);
+    console.log(sortedName);
+    // Populate mehtod - pass in sortedNames array
+    populateCards(sortedName);
+}
+
+// Onclick - sort the array and repopulate the cards:
+nameZToAButton.addEventListener('click', function () {
+    console.log('sort button working');
+    sortbyNameZToA();
 });
 
 
-// Sort by Price
-function sortbyPrice() {
+// PRICE FILTER BUTTONS
+
+// Sort by Price Low To High ------
+function sortbyPriceLowToHigh() {
     // Compare function to compare strings:
     function compareByPrice(a, b) {
         return a.price.toLowerCase().localeCompare(b.price.toLowerCase());
@@ -219,10 +246,33 @@ function sortbyPrice() {
 }
 
 // Onclick - sort the array and repopulate the cards:
-priceButton.addEventListener('click', function() {
+priceLowToHighButton.addEventListener('click', function () {
     console.log('sort button working');
-    sortbyPrice();
+    sortbyPriceLowToHigh();
 });
+
+// Sort by Price High To Low ------
+function sortbyPriceHighToLow() {
+    // Compare function to compare strings:
+    function compareByPrice(b, a) {
+        return a.price.toLowerCase().localeCompare(b.price.toLowerCase());
+    }
+    // new variable for the sorted array
+    const sortedPrice = figures.sort(compareByPrice);
+    console.log(sortedPrice);
+    // Populate mehtod - pass in sortedPrice array
+    populateCards(sortedPrice);
+
+}
+
+// Onclick - sort the array and repopulate the cards:
+priceHighToLowButton.addEventListener('click', function () {
+    console.log('sort button working');
+    sortbyPriceHighToLow();
+});
+
+
+// DESCRIPTION/SERIES BUTTONS FILTER
 
 // Sort by Description
 function sortbyDescription() {
@@ -233,13 +283,13 @@ function sortbyDescription() {
     // new variable for the sorted array
     const sortedDescription = figures.sort(compareByDescription);
     console.log(sortedDescription);
-    // Populate mehtod - pass in sortedNames array
+    // Populate mehtod - pass in sortedPrice array
     populateCards(sortedDescription);
 
 }
 
 // Onclick - sort the array and repopulate the cards:
-descriptionButton.addEventListener('click', function() {
+descriptionButton.addEventListener('click', function () {
     console.log('sort button working');
     sortbyDescription();
 });
